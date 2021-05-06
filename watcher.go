@@ -3,14 +3,15 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/fsnotify/fsnotify"
-	pollingWatcher "github.com/radovskyb/watcher"
 	"log"
 	"os"
 	"path/filepath"
 	"regexp"
 	"syscall"
 	"time"
+
+	"github.com/fsnotify/fsnotify"
+	pollingWatcher "github.com/radovskyb/watcher"
 )
 
 func directoryShouldBeTracked(cfg *WatcherConfig, path string) bool {
@@ -61,7 +62,7 @@ func (n NotifyWatcher) Watch(jobs chan<- string) {
 		select {
 		case ev := <-n.watcher.Events:
 			if ev.Op&fsnotify.Remove == fsnotify.Remove || ev.Op&fsnotify.Write == fsnotify.Write || ev.Op&fsnotify.Create == fsnotify.Create {
-				if p.cfg.flagVerbose {
+				if n.cfg.flagVerbose {
 					// Print the event's info.
 					fmt.Println(ev)
 				}
