@@ -1,6 +1,6 @@
-module github.com/githubnemo/CompileDaemon
+module github.com/tymeshifter/CompileDaemon
 
-go 1.11
+go 1.16
 
 require (
 	github.com/fatih/color v1.9.0
